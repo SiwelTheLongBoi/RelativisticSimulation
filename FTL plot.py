@@ -87,7 +87,7 @@ g = 9.81
 # Ultimately will be calculated from the thrust vector in the sim loop
 # Can only handle one axis of acceleration at this time
 x_acc = 0
-y_acc = g * 3
+y_acc = g * 5
 z_acc = 0
 
 # Step size in seconds
