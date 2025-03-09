@@ -83,11 +83,15 @@ ly = 9460730472580800
 # 1G gravity
 g = 9.81
 
+# Distance to destination in light years
+d = 11.9
+f = d / 2
+
 # Acceleration along each axis
 # Ultimately will be calculated from the thrust vector in the sim loop
 # Can only handle one axis of acceleration at this time
 x_acc = 0
-y_acc = g * 5
+y_acc = g * 0.33
 z_acc = 0
 
 # Step size in seconds
@@ -156,14 +160,14 @@ while simulate:
     time_dilation_cumulative.append(step["time_dilation_accumulated"])
     
     # Simulation specifics
-    if step["y_pos"] >= 2*ly and y_acc > 0:# Decelerate once 2 light years away
+    if step["y_pos"] >= f*ly and y_acc > 0:# Decelerate once half way
         #simulate = False
         y_acc = -y_acc
         decelerate = True
     if y_acc < 0:
         if y_position[-1] < y_position[-2]:# Stop the simulation once slowed down again
             simulate = False
-    if steps >= 105:# Stop the simulation after 20000 steps (to prevent infinite looping)
+    if steps >= 20000:# Stop the simulation after 20000 steps (to prevent infinite looping)
         simulate = False
 
 logfile.close()
